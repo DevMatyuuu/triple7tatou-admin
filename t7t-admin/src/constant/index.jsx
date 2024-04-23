@@ -1,6 +1,7 @@
 import { HiHome } from "react-icons/hi2";
 import { PiNeedleFill } from "react-icons/pi";
 import { GiEarrings } from "react-icons/gi";
+import { FaGift } from "react-icons/fa6";
 
 export const sidebarLinks = [
   {
@@ -23,8 +24,8 @@ export const sidebarLinks = [
   },
   {
     id: 4,
-    label: 'Home',
+    label: 'Promo',
     route: '/',
-    icon: <HiHome className="lg:size-8"/>,
+    icon: <FaGift className="lg:size-8"/>,
   },
 ]
