@@ -13,19 +13,19 @@ export const sidebarLinks = [
   {
     id: 2,
     label: 'Tattoos',
-    route: '/',
+    route: '/tattoos',
     icon: <PiNeedleFill className="lg:size-8"/>,
   },
   {
     id: 3,
     label: 'Piercings',
-    route: '/',
+    route: '/piercings',
     icon: <GiEarrings className="lg:size-8"/>,
   },
   {
     id: 4,
     label: 'Promo',
-    route: '/',
+    route: '/promo',
     icon: <FaGift className="lg:size-8"/>,
   },
 ]
