@@ -2,6 +2,7 @@ import React from 'react'
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';   
 import usePiercingGallery from '../hooks/usePiercingGallery';
+import { FaTrash } from "react-icons/fa";
 
 export default function Piercings() {
 
@@ -14,8 +15,7 @@ export default function Piercings() {
   const actionBodyTemplate = () => {
     return (
       <div className='flex gap-10'>
-        <button className='text-red-500'>Delete</button>
-        <button className=''>Edit</button>
+        <FaTrash className='text-red-500 size-5 cursor-pointer' />
       </div>
     )
   }
@@ -28,7 +28,7 @@ export default function Piercings() {
       <DataTable value={piercingGallery} key='id' paginator rows={5} rowsPerPageOptions={[5, 10]} tableStyle={{ minWidth: '50rem' }} className='mx-auto w-[90%] mt-6' sortField='id' sortOrder={1}>
         <Column field="id" header="ID" style={{ width: '25%' }} className='font-bold'/>
         <Column body={imageBodyTemplate} header="Images" style={{ width: '25%' }} />
-        <Column body={actionBodyTemplate} header="Action" style={{ width: '25%' }} />
+        <Column body={actionBodyTemplate} header="Action" style={{ width: '25%',}}/>
       </DataTable>
     </div>
   )

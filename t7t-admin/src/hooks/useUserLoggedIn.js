@@ -16,6 +16,6 @@ export default function useUserLoggedIn() {
     return () => unsubscribe();
   }, []);  
 
-  return { user };
+  return { user, setUser };
 
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';   
 import useTattooGallery from '../hooks/useTattooGallery';
+import { FaTrash } from 'react-icons/fa6';
 
 export default function Tattoos() {
 
@@ -11,11 +12,10 @@ export default function Tattoos() {
     return <img src={rowData.image} alt={rowData.category} style={{width: '50px'}} />;
   }
 
-  const actionBodyTemplate = (rowData) => {
+  const actionBodyTemplate = () => {
     return (
       <div className='flex gap-10'>
-        <button className='text-red-500'>Delete</button>
-        <button className=''>Edit</button>
+        <FaTrash className='text-red-500 size-5 cursor-pointer' />
       </div>
     )
   }

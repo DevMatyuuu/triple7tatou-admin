@@ -6,7 +6,8 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { RiErrorWarningFill } from 'react-icons/ri'
 import { Tooltip } from "@material-tailwind/react";
 import { Link, useNavigate } from "react-router-dom";
-
+import logo from '../assets/T7T-logo.webp'
+import banner from '../assets/T7T-banner.webp'
 
 
 const initialValues = {
@@ -53,11 +54,11 @@ export default function Login() {
     
     return (
         <div>
-          <div className='flex justify-center items-center h-screen lg:bg-white bg-primary z-50'>
-            <div className='flex h-[550px] xl:h-[600px] lg:h-[500px] md:h-[500px] shadow-2xl rounded-xl bg-white'>
-              <div className='justify-center w-[90%] xl:w-auto flex flex-col py-24 bg-white/70 xl:rounded-l-2xl rounded-2xl'>
-                <form onSubmit={handleSubmit} className='flex flex-col w-[430px] xl:w-[550px] md:w-[350px] h-[85%] items-center rounded-xl md:rounded-r-none'>
-                      <img src={logo} alt='devoro-logo' className='xl:h-24 xl:w-28 h-16 w-20 mb-10' priority/>
+          <div className='flex justify-center items-center h-screen lg:bg-black/70 bg-primary z-50'>
+            <div className='flex h-[550px] xl:h-[600px] lg:h-[500px] md:h-[500px] shadow-2xl rounded-xl bg-[#3b3b3b]'>
+              <div className='justify-center w-[90%] xl:w-auto flex flex-col py-24 bg-[#3b3b3b] xl:rounded-l-2xl rounded-2xl'>
+                <form onSubmit={handleSubmit} className='flex flex-col w-[430px] xl:w-[550px] lg:w-full md:w-full h-[85%] items-center rounded-xl md:rounded-r-none'>
+                      <img src={logo} alt='devoro-logo' className='xl:h-20 xl:w-36 h-28 w-28 mb-10' priority/>
                       <div className='flex items-center flex-col gap-5 w-full'>
                           <div className='flex relative w-full'>
                               <div className='flex items-center gap-4 w-full justify-center'>
@@ -65,22 +66,15 @@ export default function Login() {
                               </div>
                               <div className='absolute right-[107px] top-2'>
                                 {errors.email &&
-                                  <Tooltip content={errors.email}>
-                                    <RiErrorWarningFill size={24} className='text-red-800'/>
-                                  </Tooltip>
+                                <Tooltip content={errors.email} className='py-1.5'>
+                                  <span><RiErrorWarningFill size={24} className='text-white'/></span>
+                                </Tooltip>
                                 }    
                                 {invalid &&
-                                  <TooltipProvider>
-                                    <Tooltip>
-                                      <TooltipTrigger>
-                                        <RiErrorWarningFill size={24} className='text-red-800'/>
-                                      </TooltipTrigger>
-                                      <TooltipContent>
-                                        <p className='text-white xl:text-sm text-[14px]'>{invalid}</p>
-                                      </TooltipContent>      
-                                    </Tooltip>
-                                  </TooltipProvider>
-                                  } 
+                                <Tooltip content={invalid}>
+                                  <span><RiErrorWarningFill size={24} className='text-white'/></span>
+                                </Tooltip>
+                                } 
                               </div>
                           </div>
                           <div className='flex relative mb-1 w-full'>
@@ -89,40 +83,28 @@ export default function Login() {
                               </div>
                               <div className='absolute right-[107px] top-2'>
                                 {errors.password &&
-                                 <TooltipProvider>
-                                 <Tooltip>
-                                   <TooltipTrigger>
-                                     <RiErrorWarningFill size={24} className='text-red-800'/>
-                                   </TooltipTrigger>
-                                   <TooltipContent>
-                                     <p className='text-white'>{errors.password}</p>
-                                   </TooltipContent>      
-                                 </Tooltip>
-                               </TooltipProvider>
+                                <Tooltip content={errors.password}>
+                                  <span><RiErrorWarningFill size={24} className='text-white'/></span>
+                                </Tooltip>
                                 }    
                                 {invalid &&
-                                  <TooltipProvider>
-                                    <Tooltip>
-                                      <TooltipTrigger>
-                                        <RiErrorWarningFill size={24} className='text-red-800'/>
-                                      </TooltipTrigger>
-                                      <TooltipContent>
-                                        <p className='text-white xl:text-sm text-[14px]'>{invalid}</p>
-                                      </TooltipContent>      
-                                    </Tooltip>
-                                  </TooltipProvider>
-                                  }  
+                                <Tooltip content={invalid}>
+                                  <RiErrorWarningFill size={24} className='text-white'/>
+                                </Tooltip>
+                                }  
                               </div>
                           </div>
                       </div>
-                      <Link to='/' className='text-primary hover:text-red-700 font-bold text-xs mb-5 xl:w-[50%] w-[80%] flex justify-end px-1'>Forgot Password</Link>
-                      <button type='submit' onClick={signIn} className='bg-primary py-2 xl:px-28 xl:w-[50%] w-[80%] xl:w- rounded-md font-semibold hover:bg-red-700 text-white'>Log in</button>
+                      <div className='text-primary font-bold text-xs mb-5 xl:w-[50%] w-max mt-2 flex justify-end px-1'>
+                        <Link to='/' className='hover:text-red-700 text-white duration-300'>Forgot Password</Link>
+                      </div>
+                      <button type='submit' onClick={signIn} className='bg-black py-3 xl:px-28 xl:w-[50%] w-[80%] xl:w- rounded-md font-semibold hover:bg-black/50 duration-300 text-white'>Log in</button>
                   </form>
                 </div>
-                <div>
+                <div className='bg-black md:rounded-r-xl'>
                   <img src={banner} alt='formImg' className='h-full w-[400px] rounded-r-2xl lg:block hidden md:block' priority/> 
                 </div>
-            </div>
+              </div>
             </div>
         </div>
         )
