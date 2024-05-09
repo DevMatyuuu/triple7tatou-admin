@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import useTattooGallery from '../hooks/useTattooGallery'
 import usePiercingGallery from '../hooks/usePiercingGallery';
 import { Link } from 'react-router-dom';
+import useUserLoggedIn from '../hooks/useUserLoggedIn';
 
 export default function DashboardCards() {
   const [tattooCount, setTattooCount] = useState(0);
@@ -9,8 +10,13 @@ export default function DashboardCards() {
 
   const { tattooGallery } = useTattooGallery();
   const { piercingGallery } = usePiercingGallery();
-  const maxTattooCount = tattooGallery.length;
-  const maxPiercingCount = piercingGallery.length;
+  const { user } = useUserLoggedIn();
+
+  const userTattooGallery = tattooGallery.filter(userTatoo => userTatoo.uid ===  user?.uid);
+  const userPiercingGallery = piercingGallery.filter(userPiercing => userPiercing.uid ===  user?.uid);
+
+  const maxTattooCount = userTattooGallery.length;
+  const maxPiercingCount = userPiercingGallery.length;
 
   useEffect(() => {
     const intervalId = setInterval(() => {
