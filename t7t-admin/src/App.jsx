@@ -12,8 +12,9 @@ import { IoCloseSharp } from "react-icons/io5";
 import { RiImageAddFill } from "react-icons/ri";
 import Select from 'react-select'
 import { getDownloadURL, ref, uploadString } from 'firebase/storage';
-import { addDoc, collection, getDocs, limit, orderBy, query, updateDoc } from 'firebase/firestore';
+import { addDoc, collection } from 'firebase/firestore';
 import { db, storage } from './firebase/firebase';
+import { v4 as uuidv4 } from 'uuid';
 
 const dropdownItem = [
   { value: "minimalist", label: "Minimalist" },
@@ -44,40 +45,26 @@ export default function App() {
   }
 
   const upload = async () => {
-      const q = query(collection(db, 'tattooGallery'), orderBy('id', 'desc'), limit(1));
-      const querySnapshot = await getDocs(q);
-      let maxId = 0;
-      
-      querySnapshot.forEach((doc) => {
-        const numericId = Number(doc.data().id);
-        if (isNaN(numericId)) {
-          console.error(`Invalid id: ${doc.data().id}`);
-        } else {
-          maxId = Math.max(maxId, numericId);
-        }
-      });
-    
-    const newId = (maxId + 1).toString();
-      
-      const imageRef = ref(storage, `posts/${newId}/image`);
-    
-      if (media) {
-        await uploadString(imageRef, media, 'data_url');
-        const downloadURL = await getDownloadURL(imageRef);
-    
-        const docRef = await addDoc(collection(db, 'tattooGallery'), {
-          uid: user?.uid,
-          id: newId, 
-          category: category.value,
-          image: downloadURL,
-        });
-      }
-    
-      setCategory(null);
-      setMedia('')
-    }
+    const newId = uuidv4();
   
-
+    const imageRef = ref(storage, `posts/${newId}/image`);
+  
+    if (media) {
+      await uploadString(imageRef, media, 'data_url');
+      const downloadURL = await getDownloadURL(imageRef);
+  
+      const docRef = await addDoc(collection(db, 'tattooGallery'), {
+        uid: user?.uid,
+        id: newId,
+        category: category.value,
+        image: downloadURL,
+        date: new Date().toLocaleDateString
+      });
+    }
+    setCategory(null);
+    setMedia('')
+  }
+  
   const handleOpen = () => setOpen(!open);
   const handleClose = () => {
     setOpen(!open);
