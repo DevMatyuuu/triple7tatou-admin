@@ -27,6 +27,9 @@ export default function App() {
   const [open, setOpen] = useState(false)
   const [category, setCategory] = useState(null)
   const [media, setMedia] = useState('')
+  
+  const { user, setUser } = useUserLoggedIn();
+
 
   const filePickerRef = useRef();
 
@@ -71,8 +74,6 @@ export default function App() {
     setMedia(null)
     setCategory(null)
   }
-
-  const { user, setUser } = useUserLoggedIn();
 
   useEffect(() => { 
     setTimeout(() => {   
