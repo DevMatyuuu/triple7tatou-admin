@@ -9,17 +9,26 @@ import Promo from './pages/Promo';
 import Sidebar from './components/Sidebar'
 import LoaderPage from './components/LoaderPage';
 import AddTattooModal from './components/AddTattooModal';
+import AddPiercingModal from './components/AddPiercingModal';
 
 export default function App() {
   const [loading, setLoading] = useState(true)
-  const [open, setOpen] = useState(false)
+  const [openTattooModal, setOpenTattooModal] = useState(false)
+  const [openPiercingModal, setOpenPiercingModal] = useState(false)
   const [isChecking, setIsChecking] = useState(true)
   
   const { user, setUser } = useUserLoggedIn();
 
-  const handleOpen = () => setOpen(!open);
-  const handleClose = () => {
-    setOpen(!open);
+  const handleOpenTattooModal = () => setOpenTattooModal(!openTattooModal);
+  const handleCloseTattooModal = () => {
+    setOpenTattooModal(!openTattooModal);
+    setMedia(null)
+    setCategory(null)
+  }
+
+  const handleOpenPiercingModal = () => setOpenPiercingModal(!openPiercingModal);
+  const handleClosePiercingModal = () => {
+    setOpenPiercingModal(!openPiercingModal);
     setMedia(null)
     setCategory(null)
   }
@@ -64,13 +73,14 @@ export default function App() {
             </div>
             <Routes>
               <Route path='/' exact element={<Dashboard />} />
-              <Route path='/tattoos' element={<Tattoos open={open} handleOpen={handleOpen} />} />
-              <Route path='/piercings' element={<Piercings />} />
+              <Route path='/tattoos' element={<Tattoos open={openTattooModal} handleOpen={handleOpenTattooModal} />} />
+              <Route path='/piercings' element={<Piercings open={openPiercingModal} handleOpen={handleOpenPiercingModal} />} />
               <Route path='/promo' element={<Promo />} />
             </Routes>
           </div>
         </main>
-        <AddTattooModal handleClose={handleClose} open={open}/>
+        <AddTattooModal handleClose={handleCloseTattooModal} open={openTattooModal}/>
+        <AddPiercingModal handleClose={handleClosePiercingModal} open={openPiercingModal}/>
     </div>
   </>
   )

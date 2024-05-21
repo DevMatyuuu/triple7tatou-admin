@@ -1,31 +1,20 @@
 import React, { useRef, useState } from 'react'
 import { IoCloseSharp } from "react-icons/io5";
 import { RiImageAddFill } from "react-icons/ri";
-import Select from 'react-select'
 import { getDownloadURL, ref, uploadString } from 'firebase/storage';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { db, storage } from '../firebase/firebase';
 import { v4 as uuidv4 } from 'uuid';
 import useUserLoggedIn from '../hooks/useUserLoggedIn';
 
-const dropdownItem = [
-    { value: "minimalist", label: "Minimalist" },
-    { value: "realism", label: "Realism" },
-    { value: "traditional", label: "Traditional" },
-  ]
 
-export default function AddTattooModal({open, handleClose}) {
-    const [category, setCategory] = useState(null)
+export default function AddPiercingModal({open, handleClose}) {
     const [media, setMedia] = useState('')
 
     const { user } = useUserLoggedIn();
 
     const filePickerRef = useRef();
 
-    const handleDropdownChange = (selectedOption) => {
-      setCategory(selectedOption);
-    };
-  
     const addImageToModal = (e) => {
       const reader = new FileReader();
       if (e.target.files[0]) {
@@ -36,7 +25,7 @@ export default function AddTattooModal({open, handleClose}) {
       }
     }
   
-    const uploadTattoo = async () => {
+    const uploadPiercing = async () => {
       const newId = uuidv4();
     
       const imageRef = ref(storage, `posts/${newId}/image`);
@@ -45,15 +34,13 @@ export default function AddTattooModal({open, handleClose}) {
         await uploadString(imageRef, media, 'data_url');
         const downloadURL = await getDownloadURL(imageRef);
     
-        const docRef = await addDoc(collection(db, 'tattooGallery'), {
+        const docRef = await addDoc(collection(db, 'piercingGallery'), {
           uid: user?.uid,
           id: newId,
-          category: category.value,
           image: downloadURL,
           timestamp: serverTimestamp(),
         });
       }
-      setCategory(null);
       setMedia('')
     }
 
@@ -63,7 +50,7 @@ export default function AddTattooModal({open, handleClose}) {
         <div className='flex flex-col py-6 items-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-xl bg-[#3b3b3b] h-auto[600px] w-[25%]'>
             <div className='w-[90%] h-full'>
             <div className='flex justify-between items-center mb-10'>
-                <span className='text-white text-xl'>Add Tattoo Image</span>
+                <span className='text-white text-xl'>Add Piercing Image</span>
                 <IoCloseSharp onClick={handleClose} className='text-white size-7 hover:text-red-500 cursor-pointer duration-200'/>
             </div>
             <div className='flex flex-col justify-center items-center gap-10 py-14'>
@@ -79,10 +66,9 @@ export default function AddTattooModal({open, handleClose}) {
                 <input ref={filePickerRef} onChange={addImageToModal} type='file' id='file' hidden />
                 </div> 
                 }
-                <Select onChange={(selectedOption) => setCategory(selectedOption)} options={dropdownItem} value={category} placeholder='Select Category' className='w-[75%]'/>
             </div>
             <div className='flex w-full justify-end gap-5 text-white'>
-                <button onClick={() => uploadTattoo()} className='hover:text-green-600 duration-200'>Upload</button>
+                <button onClick={() => uploadPiercing()} className='hover:text-green-600 duration-200'>Upload</button>
             </div>
             </div>
         </div>

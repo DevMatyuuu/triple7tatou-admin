@@ -36,7 +36,8 @@ export default function Tattoos({open, handleOpen}) {
   return (
     <div className='relative h-full w-full'>
       <div className='w-full'>
-        <div className='flex justify-end px-20 pt-5'>
+        <div className='flex justify-between items-center px-20 pt-5'>
+          <h1 className='text-white font-[engraver] text-4xl'>Tattoo Images</h1>
           <button className='text-black bg-white hover:bg-white/50 hover:text-white py-2 px-3 rounded-md' onClick={handleOpen}>Upload Image</button>
         </div>
         <DataTable 
