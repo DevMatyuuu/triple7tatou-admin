@@ -54,7 +54,7 @@ export default function App() {
         <div className='flex flex-col w-full'>
           <div className='flex text-white lg:text-3xl w-full lg:pb-10 lg:px-20 lg:pt-10 lg:border-b-[1px] bg-cover lg:border-white/20 justify-between font-semibold'>
             <span className='font-[Engraver] text-5xl'>Admin</span>
-            <span>Hi! {user.email.split()}</span>
+            <span>Hi, MJ!</span>
           </div>
           <Routes>
             <Route path='/' element={<Dashboard />} />
