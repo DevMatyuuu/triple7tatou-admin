@@ -19,3 +19,4 @@ export const storage = getStorage();
 
 export const tattooGalleryCollection = collection(db, 'tattooGallery');
 export const piercingGalleryCollection = collection(db, 'piercingGallery');
+export const promoCollection = collection(db, 'promo');

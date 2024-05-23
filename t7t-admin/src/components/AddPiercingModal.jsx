@@ -28,7 +28,7 @@ export default function AddPiercingModal({open, handleClose}) {
     const uploadPiercing = async () => {
       const newId = uuidv4();
     
-      const imageRef = ref(storage, `posts/${newId}/image`);
+      const imageRef = ref(storage, `piercings/${newId}/image`);
     
       if (media) {
         await uploadString(imageRef, media, 'data_url');
@@ -58,7 +58,7 @@ export default function AddPiercingModal({open, handleClose}) {
                 ?
                 <div className='relative w-max h-full'>
                 <img src={media} alt='uploaded-image' className='rounded-xl object-contain max-w-[320px] h-[160px] z-0 mx-auto'/>
-                <IoCloseSharp onClick={() => setMedia(null)} className='absolute top-2 right-2 px-1 size-6 rounded-full text-white hover:text-red-500 duration-200 cursor-pointer bg-gray-900'/>
+                <IoCloseSharp onClick={() => setMedia('')} className='absolute top-2 right-2 px-1 size-6 rounded-full text-white hover:text-red-500 duration-200 cursor-pointer bg-gray-900'/>
                 </div>
                 : 
                 <div onClick={() => filePickerRef.current.click()} className='flex gap-3 items-center justify-center mx-auto w-[75%] h-[160px] bg-slate-300 rounded-lg group hover:bg-slate-500 cursor-pointer duration-200'>
