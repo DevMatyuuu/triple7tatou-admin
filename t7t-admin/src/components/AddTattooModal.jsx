@@ -10,8 +10,8 @@ import useUserLoggedIn from '../hooks/useUserLoggedIn';
 
 const dropdownItem = [
     { value: "minimalist", label: "Minimalist" },
-    { value: "realism", label: "Realism" },
-    { value: "traditional", label: "Traditional" },
+    { value: "medium", label: "Medium" },
+    { value: "large", label: "Large" },
   ]
 
 export default function AddTattooModal({open, handleClose}) {
