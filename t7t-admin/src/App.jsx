@@ -10,11 +10,14 @@ import LoaderPage from './components/LoaderPage';
 import AddTattooModal from './components/AddTattooModal';
 import AddPiercingModal from './components/AddPiercingModal';
 import useUserLoggedIn from './hooks/useUserLoggedIn';
+import AddPromoModal from './components/AddPromoModal';
 
 export default function App() {
   const [loading, setLoading] = useState(true);
   const [openTattooModal, setOpenTattooModal] = useState(false);
   const [openPiercingModal, setOpenPiercingModal] = useState(false);
+  const [openPromoModal, setOpenPromoModal] = useState(false);
+
   const { user } = useUserLoggedIn();
   const navigate = useNavigate();
 
@@ -26,6 +29,11 @@ export default function App() {
   const handleOpenPiercingModal = () => setOpenPiercingModal(!openPiercingModal);
   const handleClosePiercingModal = () => {
     setOpenPiercingModal(!openPiercingModal);
+  };
+
+  const handleOpenPromoModal = () => setOpenPromoModal(!openPromoModal);
+  const handleClosePromoModal = () => {
+    setOpenPromoModal(!openPromoModal);
   };
 
   useEffect(() => {
@@ -60,12 +68,13 @@ export default function App() {
             <Route path='/' element={<Dashboard />} />
             <Route path='/tattoos' element={<Tattoos open={openTattooModal} handleOpen={handleOpenTattooModal} />} />
             <Route path='/piercings' element={<Piercings open={openPiercingModal} handleOpen={handleOpenPiercingModal} />} />
-            <Route path='/promo' element={<Promo />} />
+            <Route path='/promo' element={<Promo open={openPromoModal} handleOpen={handleOpenPromoModal} />} />
           </Routes>
         </div>
       </main>
       <AddTattooModal handleClose={handleCloseTattooModal} open={openTattooModal} />
       <AddPiercingModal handleClose={handleClosePiercingModal} open={openPiercingModal} />
+      <AddPromoModal handleClose={handleClosePromoModal} open={openPromoModal} />
     </div>
   );
 }

@@ -1,19 +1,19 @@
 import React, { useState } from 'react'
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';   
-import useTattooGallery from '../hooks/useTattooGallery';
 import { FaTrash } from 'react-icons/fa6';
 import useUserLoggedIn from '../hooks/useUserLoggedIn';
-import DeleteTattooModal from '../components/DeleteTattooModal';
+import usePromo from '../hooks/usePromo';
+import DeletePromoModal from '../components/DeletePromoModal';
 
 export default function Promo({open, handleOpen}) {
-  const { tattooGallery } = useTattooGallery();
+  const { promo } = usePromo();
   const [openDelete, setOpenDelete] = useState(false);
   const [deleteRowId, setDeleteRowId] = useState(null);
 
   const { user } = useUserLoggedIn();
 
-  const userTattooGallery = tattooGallery.filter(userTatoo => userTatoo.uid ===  user?.uid)
+  const userPromoList = promo.filter(userPromo => userPromo.uid ===  user?.uid)
 
   const handleOpenDeleteModal = (id) => {
     setOpenDelete(true)
@@ -41,7 +41,7 @@ export default function Promo({open, handleOpen}) {
           <button className='text-black bg-white hover:bg-white/50 hover:text-white py-2 px-3 rounded-md' onClick={handleOpen}>Add Promo</button>
         </div>
         <DataTable 
-          value={userTattooGallery} 
+          value={userPromoList} 
           key='id' 
           paginator 
           rows={5} 
@@ -50,12 +50,13 @@ export default function Promo({open, handleOpen}) {
           className='mx-auto w-[90%] mt-6' 
           sortField='timestamp' 
           sortOrder={-1}>
-          <Column field="category" header="Category" style={{ width: '30%' }} className='first-letter:uppercase font-bold' />
-          <Column body={imageBodyTemplate} header="Images" style={{ width: '30%' }} />
-          <Column body={actionBodyTemplate} header="Action" style={{ width: '30%' }} />
+          <Column field="title" header="Title" style={{ width: '25%' }} className='first-letter:uppercase font-bold' />
+          <Column field="description" header="Description" style={{ width: '10%' }} className='first-letter:uppercase font-bold' />
+          <Column body={imageBodyTemplate} header="Images" style={{ width: '25%' }} />
+          <Column body={actionBodyTemplate} header="Action" style={{ width: '25%' }} />
         </DataTable>
       </div>
-      <DeleteTattooModal openDelete={openDelete} setOpenDelete={setOpenDelete} deleteRowId={deleteRowId} />
+      <DeletePromoModal openDelete={openDelete} setOpenDelete={setOpenDelete} deleteRowId={deleteRowId} />
     </div>
   )
 }
